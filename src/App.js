@@ -7,11 +7,15 @@ import {
 import Details from "./Details";
 import Home from "./Home"
 
+
 function App(props) {
+
+
+
   return (
     <Switch>
       <Route exact path="/">
-        <Home />
+          <Home />
       </Route>
       <Route path="/details/:id">
         <Details />

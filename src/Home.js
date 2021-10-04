@@ -1,36 +1,28 @@
 import React from 'react';
 
 import { Jumbotron, Button, Card, CardBody, Navbar, NavbarBrand, Nav, NavItem, Table, Row, Col } from 'reactstrap';
-import { API } from './api';
-
-import {
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 
-import useData from "./useData";
-import Details from "./Details";
+// import {
+//     Switch,
+//     Route,
+//     Link
+// } from "react-router-dom";
+
+
 import { useHistory } from "react-router-dom";
-
-
-import {
-    courseReducer,
-    initialState,
-    addAction,
-    markAction,
-    deleteAction
-} from "./course";
-
-const courseContext = React.createContext(null);
+import useData from "./useData";
+import { API } from './api';
+import { setCourses } from "./actions/coursesActions"
 
 const Home = () => {
-    const stats = useData(API['stats']);
+    const history = useHistory();
+    const dispatch = useDispatch();
     const instructors = useData(API['instructors']);
     const courses = useData(API['courses']);
-    const history = useHistory();
-
+    dispatch(setCourses(courses));
+    const stats = useData(API['stats']);
 
     const goToDetails = (id) => {
         history.push("/details/" + id)
@@ -81,27 +73,26 @@ const Home = () => {
                         </thead>
                         <tbody>
 
+                            {
+                                courses.slice(-5).map(({ id, title, imagePath, price, dates, duration, open, instructors, description }) => {
+                                    return (
+                                        <tr key={id}>
+                                            <td> {title} </td>
+                                            <td> {open === true ? "yes" : "no"} </td>
+                                            <td> {price.normal} </td>
+                                            <td> {dates["start_date"]}-{dates["end_date"]}</td>
+                                            <td><Button onClick={() => goToDetails(id)} color="primary">View Details</Button></td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
-                        {
-                            courses.slice(-5).map(({ id, title, imagePath, price, dates, duration, open, instructors, description }) => {
-                                return (
-                                    <tr>
-                                        <td> {title} </td>
-                                        <td> {open === true ? "yes" : "no"} </td>
-                                        <td> {price.normal} </td>
-                                        <td> {dates["start_date"]}-{dates["end_date"]}</td>
-                                        <td><Button bsClass="custom-btn" onClick={() => goToDetails(id)} color="primary">View Details</Button></td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </Table> : null
-                }
+
+                    </Table> : null}
             </div>
 
         </div>
-    );
+    )
 }
-
 
 export default Home;
