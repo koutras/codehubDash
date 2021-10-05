@@ -14,7 +14,11 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useData from "./useData";
 import { API } from './api';
-import { setCourses } from "./actions/coursesActions"
+import { setCourses, setInstructors } from "./actions/coursesActions"
+
+export const getCourses = () => {
+    
+}
 
 const Home = () => {
     const history = useHistory();
@@ -22,6 +26,8 @@ const Home = () => {
     const instructors = useData(API['instructors']);
     const courses = useData(API['courses']);
     dispatch(setCourses(courses));
+    dispatch(setInstructors(instructors));
+
     const stats = useData(API['stats']);
 
     const goToDetails = (id) => {
