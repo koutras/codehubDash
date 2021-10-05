@@ -6,6 +6,10 @@ import {
 } from "react-router-dom";
 import Details from "./Details";
 import Home from "./Home"
+import CourseForm from "./CourseForm";
+import Courses from "./Courses";
+
+
 
 
 function App(props) {
@@ -16,6 +20,12 @@ function App(props) {
     <Switch>
       <Route exact path="/">
           <Home />
+      </Route>
+      <Route exact path="/AddNew">
+        <CourseForm/>
+      </Route>
+      <Route exact path="/Courses">
+        <Courses/>
       </Route>
       <Route path="/details/:id">
         <Details />

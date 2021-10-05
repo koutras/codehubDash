@@ -2,22 +2,13 @@ import React from 'react';
 
 import { Jumbotron, Button, Card, CardBody, Navbar, NavbarBrand, Nav, NavItem, Table, Row, Col } from 'reactstrap';
 import { useDispatch } from "react-redux";
-
-
-// import {
-//     Switch,
-//     Route,
-//     Link
-// } from "react-router-dom";
-
-
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import useData from "./useData";
 import { API } from './api';
 import { setCourses, setInstructors } from "./actions/coursesActions"
 
 export const getCourses = () => {
-    
+
 }
 
 const Home = () => {
@@ -41,10 +32,11 @@ const Home = () => {
                 <NavbarBrand style={{ color: "white" }} href="/">Code.Hub Dashboard</NavbarBrand>
                 <Nav>
                     <NavItem style={{ float: "right" }}>
-                        Courses
+                    <Link to ="/Courses">
+                        Courses</Link>
                     </NavItem>
                     <NavItem>
-                        Add New Course
+                    <Link to="/AddNew">Add New Course</Link>
                     </NavItem>
                 </Nav>
             </Navbar>

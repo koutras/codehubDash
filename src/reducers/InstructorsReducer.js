@@ -3,7 +3,7 @@ import { SET_INSTRUCTORS } from "../constants/coursesTypes"
 const initialState = []
 
 
-export default (state = initialState, action) => {
+const InstructorsReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -13,3 +13,5 @@ export default (state = initialState, action) => {
             return state;
     }
 }
+
+export default InstructorsReducer;
