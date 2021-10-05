@@ -10,6 +10,7 @@ const CourseForm = () => {
     const { instructors } = useSelector((state) => state);
     const [newCourse, setNewCourse] = useState(null);
 
+    //work needed here to handle change of form fields
     const handleChange  = (event) => {
         if (event.target.value !== "")
           setNewCourse(event.target.value);
