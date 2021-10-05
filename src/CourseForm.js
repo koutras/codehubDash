@@ -12,8 +12,11 @@ const CourseForm = () => {
 
     //work needed here to handle change of form fields
     const handleChange  = (event) => {
-        if (event.target.value !== "")
-          setNewCourse(event.target.value);
+        if (event.target.type == "text") {
+            if (event.target.value !== "")
+            setNewCourse({...newCourse, [event.target.id]:event.target.value});
+        }
+
       }
 
     const handleSubmit= ()=> {
@@ -24,21 +27,21 @@ const CourseForm = () => {
         <Form inline>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                 <Label for="Title" className="mr-sm-2">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="Course Title" />
-                <Input type="text" name="duration" id="duration" placeholder="Duration" />
-                <Input type="text" name="imagepath" id="imagepath" placeholder="Image path" />
+                <Input onChange={handleChange} type="text" name="title" id="title" placeholder="Course Title" />
+                <Input onChange={handleChange} type="text" name="duration" id="duration" placeholder="Duration" />
+                <Input onChange={handleChange} type="text" name="imagePath" id="imagePath" placeholder="Image path" />
 
             </FormGroup>
             <FormGroup check>
                 <Label check>
-                    <Input type="checkbox" /> Bookable
+                    <Input onChange={handleChange} type="checkbox" /> Bookable
                 </Label>
             </FormGroup>
             <FormGroup>
                 <h3> Instructors</h3>
                 {instructors ? instructors.map((instructor) => {
                     return (<div>
-                        <Input type="checkbox" /> <span>{instructor.name.first}  {instructor.name.last}</span>
+                        <Input onChange={handleChange} type="checkbox" /> <span>{instructor.name.first}  {instructor.name.last}</span>
 
                     </div>
 
@@ -47,7 +50,7 @@ const CourseForm = () => {
                 }
             </FormGroup>
             <FormGroup>
-                <Input type="text" name="description" id="description" placeholder="description" />
+                <Input onChange={handleChange} type="text" name="description" id="description" placeholder="description" />
 
             </FormGroup>
 
