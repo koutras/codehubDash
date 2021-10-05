@@ -16,4 +16,3 @@ export const addCourse = (course) => ({
     payload: course,
 })
 
-

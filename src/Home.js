@@ -30,18 +30,19 @@ const Home = () => {
 
             <Navbar style={{ color: "white" }} color="dark" light expand="md">
                 <NavbarBrand style={{ color: "white" }} href="/">Code.Hub Dashboard</NavbarBrand>
-                <Nav>
+                <Nav className="ms-auto">
                     <NavItem style={{ float: "right" }}>
                     <Link to ="/Courses">
                         Courses</Link>
                     </NavItem>
-                    <NavItem>
+                    &nbsp;
+                    <NavItem style={{ float: "right" }}>
                     <Link to="/AddNew">Add New Course</Link>
                     </NavItem>
                 </Nav>
             </Navbar>
             <Jumbotron>
-                <h1 className="display-6">Welcome to Code.Hub Dashboard</h1>
+                <h1 className="display-4">Welcome to Code.Hub Dashboard</h1>
                 <p className="lead">Manage everything and have fun!</p>
                 <hr className="my-2" />
             </Jumbotron>

@@ -1,8 +1,23 @@
 import { Button, Form, FormGroup, Label, Input, NavItem } from 'reactstrap';
 import { useSelector } from "react-redux";
+import React, {useState} from "react";
+import { API } from './api';
+import PostData from "./useData";
+
+ 
 
 const CourseForm = () => {
     const { instructors } = useSelector((state) => state);
+    const [newCourse, setNewCourse] = useState(null);
+
+    const handleChange  = (event) => {
+        if (event.target.value !== "")
+          setNewCourse(event.target.value);
+      }
+
+    const handleSubmit= ()=> {
+        PostData(newCourse,API['courses'])
+    }
 
     return (
         <Form inline>
@@ -30,8 +45,12 @@ const CourseForm = () => {
                 }) : null
                 }
             </FormGroup>
+            <FormGroup>
+                <Input type="text" name="description" id="description" placeholder="description" />
 
-            <Button>Submit</Button>
+            </FormGroup>
+
+            <Button onClick={handleSubmit}>Submit</Button>
         </Form>
 
     )
