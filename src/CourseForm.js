@@ -2,13 +2,28 @@ import { Button, Form, FormGroup, Label, Input, NavItem } from 'reactstrap';
 import { useSelector } from "react-redux";
 import React, {useState} from "react";
 import { API } from './api';
-import PostData from "./useData";
-
  
 
 const CourseForm = () => {
-    const { instructors } = useSelector((state) => state);
     const [newCourse, setNewCourse] = useState(null);
+    const { courses, instructors } = useSelector((state) => state);
+
+    const findNextId=(courses) => {
+        const maxId = Math.max.apply(Math, courses.map(function(o) { return o.id; }))
+        return Number.parseInt(maxId +1);
+
+    }
+    const postData = (data, url) => {
+        // PUT request using fetch inside useEffect React hook
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        fetch(url, requestOptions)
+            .then(response => response.json());
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    }
 
     //work needed here to handle change of form fields
     const handleChange  = (event) => {
@@ -20,7 +35,7 @@ const CourseForm = () => {
       }
 
     const handleSubmit= ()=> {
-        PostData(newCourse,API['courses'])
+        postData({...newCourse},API['courses']);
     }
 
     return (
